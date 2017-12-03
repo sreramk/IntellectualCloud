@@ -1,0 +1,11 @@
+<resources>
+
+
+    <string name="app_name">Intellectual Cloud</string>
+    <string name="sample">It is a simple program,</string>
+    <string name="sample1">A simple C program to display Hello, World! on the screen. Since, it\'s a very simple program, it is often used to illustrate the syntax of a programming language.</string>
+    <string name="t_amp_amp_c">T&amp;C</string>
+    <string name="tandcdburl">https://intellectualcloud-5fe7b.firebaseio.com/Termsandconditions</string>
+    <string name="privacypolicydburl">https://intellectualcloud-5fe7b.firebaseio.com/Privacypolicy/</string>
+    <string name="format">This format: 2018/01/01 10:00:00  yyyy/mm/dd</string>
+</resources>

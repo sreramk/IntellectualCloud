@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/aboutrl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.intellectualcloud.intellectualcloud.About">
+
+
+    <ScrollView
+        android:id="@+id/scrollv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbarSize="3.2dip">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- Cloud Intellect -->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="08dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:contentPadding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:padding="5dp"
+                        android:text="Intellectual Cloud"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+                        <ImageView
+                            android:id="@+id/teampic"
+                            android:layout_width="150dp"
+                            android:layout_height="100dp"
+                            android:layout_weight="2" />
+
+
+                        <TextView
+                            android:id="@+id/teamdesc"
+                            android:layout_width="wrap_content"
+
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:lineSpacingMultiplier="1.2"
+                            android:padding="10dp"
+                            android:text="@string/sample"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/teamcon"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingMultiplier="1.2"
+                        android:padding="10dp"
+                        android:text="@string/sample1"
+                        android:textSize="16sp" />
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <!-- Cloud Intellect Primary Features -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+
+                    android:padding="10dp"
+                    android:text="Features"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+
+                <ListView
+                    android:id="@+id/lv_forfeatures"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:descendantFocusability="blocksDescendants"
+                    android:scrollbarSize="3.5dip"
+
+                    />
+            </LinearLayout>
+
+            <!-- Cloud Intellect Team workers -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+
+                    android:padding="10dp"
+                    android:text="The Team"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+
+                <ListView
+                    android:id="@+id/lv_forworkers"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_centerHorizontal="true"
+                    android:descendantFocusability="blocksDescendants"
+                    android:scrollbarSize="3.5dip"
+
+                    />
+            </LinearLayout>
+
+            <!-- Cloud Intellect  ANy helu\p contact us-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="08dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:contentPadding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:padding="5dp"
+                        android:text="Contact Us"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <Button
+                            android:id="@+id/btn_contactus"
+                            style="@style/Base.Widget.AppCompat.Button.Colored"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Email" />
+
+
+                        <Button
+                            android:id="@+id/btn_number"
+                            style="@style/Base.Widget.AppCompat.Button.Colored"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Phone" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

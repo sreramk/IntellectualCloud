@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.intellectualcloud.intellectualcloud.Home">
+
+    <ScrollView
+        android:id="@+id/scrollv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbarSize="3.2dip">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+
+                android:id="@+id/cvforcountdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="08dp"
+                android:visibility="visible"
+                card_view:cardCornerRadius="2dp"
+                card_view:contentPadding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="Intellectual Cloud Launch Date"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <cn.iwgang.countdownview.CountdownView
+                            android:id="@+id/cv_countdownViewTest4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="20dp"
+                            app:isShowDay="true"
+                            app:isShowHour="true"
+                            app:isShowMillisecond="false"
+                            app:isShowMinute="true"
+                            app:isShowSecond="true"
+                            app:isTimeTextBold="true"
+                            app:suffixDay="Days"
+                            app:suffixGravity="bottom"
+                            app:suffixHour="Hours"
+                            app:suffixMinute="Mins"
+                            app:suffixSecond="Sec"
+                            app:suffixTextColor="#000000"
+                            app:suffixTextSize="12sp"
+                            app:timeTextColor="#000000"
+                            app:timeTextSize="22sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvforbigday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="08dp"
+                android:visibility="visible"
+                card_view:cardCornerRadius="2dp"
+                card_view:contentPadding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="Intellectual Cloud Big day"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/websitebtn"
+                        style="@style/Base.Widget.AppCompat.Button.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Visit Website!" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <ListView
+                android:id="@+id/lv_feed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants"
+                android:scrollbarSize="3.5dip"
+
+                />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="visible" />
+</RelativeLayout>
