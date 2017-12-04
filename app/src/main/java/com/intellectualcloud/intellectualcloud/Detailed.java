@@ -1,12 +1,16 @@
 package com.intellectualcloud.intellectualcloud;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.dynamiclinks.DynamicLink;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.gson.Gson;
 import com.intellectualcloud.intellectualcloud.model.post;
 import com.squareup.picasso.Picasso;
@@ -54,6 +58,26 @@ public class Detailed extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String createDynamicLink() {
+
+
+        DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
+                .setLink(Uri.parse("https://youtube.com/"))
+                .setDynamicLinkDomain("xb6hq.app.goo.gl")
+                .setAndroidParameters(
+                        new DynamicLink.AndroidParameters.Builder("com.intellectualcloud.intellectualcloud")
+                                .build())
+                .setSocialMetaTagParameters(
+                        new DynamicLink.SocialMetaTagParameters.Builder()
+                                .setTitle("Example of a Dynamic Link")
+                                .setDescription("This link works whether the app is installed or not!")
+                                .build())
+                .buildDynamicLink();
+
+        Uri dynamicLinkUri = dynamicLink.getUri();
+        return dynamicLinkUri.toString();
     }
 
     private void drawimg(String url) {

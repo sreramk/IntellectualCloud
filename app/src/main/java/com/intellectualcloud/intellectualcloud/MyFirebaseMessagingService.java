@@ -59,12 +59,15 @@ String title,body;
 
     private void sendNotification(String title, String body, Map<String, String> map) {
         Bitmap icon = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-        String TrueOrFalse = map.get("TrueorFalse");
+       // String TrueOrFalse = map.get("TrueorFalse");
+        String picture_url = map.get("picture_url");
         Intent intent = new Intent(this, Home.class);
         intent.putExtra("title",title);
+        intent.putExtra("picture_url",picture_url);
+
         intent.putExtra("body",body);
 
-        intent.putExtra("AnotherActivity", TrueOrFalse);
+        //intent.putExtra("AnotherActivity", TrueOrFalse);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
@@ -80,7 +83,6 @@ String title,body;
                 .setSmallIcon(R.mipmap.ic_launcher);
 
         try {
-            String picture_url = map.get("picture_url");
 
             if (picture_url != null && !"".equals(picture_url)) {
                 URL url = new URL(picture_url);
