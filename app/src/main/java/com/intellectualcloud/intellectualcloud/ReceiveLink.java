@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.appinvite.AppInvite;
@@ -20,15 +21,17 @@ import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 public class ReceiveLink extends AppCompatActivity {
     private GoogleApiClient googleApiClient;
 
+    TextView tvfordeeplink;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receive_link);
-        Intent intent = getIntent();
-        String action = intent.getAction();
-        Uri data = intent.getData();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-       
+        tvfordeeplink = findViewById(R.id.tvfordeeplink);
+
         FirebaseDynamicLinks.getInstance()
                 .getDynamicLink(getIntent())
                 .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
@@ -38,14 +41,14 @@ public class ReceiveLink extends AppCompatActivity {
                         Uri deepLink = null;
                         if (pendingDynamicLinkData != null) {
                             deepLink = pendingDynamicLinkData.getLink();
-                        }
-                        Toast.makeText(ReceiveLink.this, "" + deepLink.toString(), Toast.LENGTH_SHORT).show();
-                        // Handle the deep link. For example, open the linked
-                        // content, or apply promotional credit to the user's
-                        // account.
-                        // ...
+                            //sample format: https://github.com/st="title"/sd="desc"/
 
-                        // ...
+
+                        }
+
+                        String deeplink = deepLink.toString();
+                        Toast.makeText(ReceiveLink.this, deeplink, Toast.LENGTH_SHORT).show();
+                        tvfordeeplink.setText(deeplink);
                     }
                 })
                 .addOnFailureListener(this, new OnFailureListener() {
@@ -56,6 +59,17 @@ public class ReceiveLink extends AppCompatActivity {
                 });
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        startActivity(new Intent(this, Home.class));
+    }
 
 }
 

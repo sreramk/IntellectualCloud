@@ -15,6 +15,7 @@ public class ShowNotification extends AppCompatActivity {
     ImageView ivforpic;
     Button sharenot;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

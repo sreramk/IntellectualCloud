@@ -47,10 +47,9 @@
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="youtube.com" android:scheme="http"/>
-                <data android:host="youtube.com" android:scheme="https"/>
-                 </intent-filter>
-
+                <data android:host="github.com" android:scheme="http"/>
+                <data android:host="github.com" android:scheme="https"/>
+            </intent-filter>
         </activity>
     </application>
 

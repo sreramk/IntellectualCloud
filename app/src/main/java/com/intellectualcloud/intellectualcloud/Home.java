@@ -4,10 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,11 +23,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.gson.Gson;
 import com.intellectualcloud.intellectualcloud.model.post;
 
@@ -51,11 +58,11 @@ public class Home extends AppCompatActivity {
 
 
         if (getIntent().getExtras() != null) {
-            Intent intent  = new Intent(this, ShowNotification.class);
+            Intent intent = new Intent(this, ShowNotification.class);
 
             for (String key : getIntent().getExtras().keySet()) {
                 String value = getIntent().getExtras().getString(key);
-                Toast.makeText(this, key+value, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, key + value, Toast.LENGTH_SHORT).show();
 
                 if (key.equals("picture_url"))
                     intent.putExtra("picture_url", value);
@@ -82,7 +89,7 @@ public class Home extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 releaseDate = dataSnapshot.child("ReleaseDate").getValue(String.class);
-                //  Toast.makeText(Home.this, "" + releaseDate, Toast.LENGTH_SHORT).show();
+                /* Toast.makeText(Home.this, "" + releaseDate, Toast.LENGTH_SHORT).show(); */
                 countDownStart(releaseDate);
 
             }
