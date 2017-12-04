@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +26,7 @@ public class Detailed extends AppCompatActivity {
 
     TextView tvmtitle, tvmcon, tvmdesc;
     ImageView iv;
-    Button btn_share;
+    FloatingActionButton btn_share;
     String pt, pc, pd, pi;
 
     /* pt -post title,pd - post desc, pc - post content,pi - post img */
@@ -65,9 +67,6 @@ public class Detailed extends AppCompatActivity {
 
     }
 
-    String shortlinkcreator(String url) {
-        return url;
-    }
 
     private void sharelink() {
 
@@ -75,9 +74,6 @@ public class Detailed extends AppCompatActivity {
         gcreatedynamiclink();
 
     }
-
-
-    //https://github.com/" + pt + pd + pc + pi
 
 
     private void gcreatedynamiclink() {
@@ -104,15 +100,27 @@ public class Detailed extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Short link created
                             Uri shortLink = task.getResult().getShortLink();
-                            String a = shortLink.toString();
-                            Toast.makeText(Detailed.this, "Inside" + a, Toast.LENGTH_SHORT).show();
+                            final String a = shortLink.toString();
+                            View parentLayout = findViewById(R.id.detailed);
+                            Snackbar.make(parentLayout, "Share...", Snackbar.LENGTH_LONG)
+                                    .setAction("Select", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
 
-                            shareit(a);
+                                            shareit(a);
+
+                                        }
+                                    })
+                                    .setActionTextColor(getResources().getColor(android.R.color.white))
+                                    .show();
+
+
+//  Toast.makeText(Detailed.this, "Sharing..." + a, Toast.LENGTH_SHORT).show();
                             Uri flowchartLink = task.getResult().getPreviewLink();
                         } else {
                             // Error
                             // ...
-                            Toast.makeText(Detailed.this, "Error", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(Detailed.this, "Error", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -154,6 +162,6 @@ public class Detailed extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
-        startActivity(new Intent(this, Home.class));
+        //  startActivity(new Intent(this, Home.class));
     }
 }

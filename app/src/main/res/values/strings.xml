@@ -8,4 +8,8 @@
     <string name="tandcdburl">https://intellectualcloud-5fe7b.firebaseio.com/Termsandconditions</string>
     <string name="privacypolicydburl">https://intellectualcloud-5fe7b.firebaseio.com/Privacypolicy/</string>
     <string name="format">This format: 2018/01/01 10:00:00  yyyy/mm/dd</string>
+    <string name="learn_more">Learn More</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
+    <string name="copyrights_u00a9">copyrights ©</string>
 </resources>

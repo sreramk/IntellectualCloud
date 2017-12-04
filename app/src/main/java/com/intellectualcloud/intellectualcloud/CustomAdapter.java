@@ -5,11 +5,14 @@ package com.intellectualcloud.intellectualcloud;
  */
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 
+import com.google.gson.Gson;
 import com.intellectualcloud.intellectualcloud.model.post;
 
 import java.util.ArrayList;
@@ -54,7 +57,7 @@ public class CustomAdapter extends BaseAdapter {
         if (convertview == null) {
             convertview = inflater.inflate(R.layout.postrow, viewGroup, false);
 
-        }
+           }
 
         MyHolder holder = new MyHolder(convertview);
         holder.tvtitle.setText(posts.get(i).getPost_title());

@@ -7,10 +7,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,18 +18,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
-import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.gson.Gson;
 import com.intellectualcloud.intellectualcloud.model.post;
 
@@ -50,6 +43,7 @@ public class Home extends AppCompatActivity {
     CardView cvforcountdown, cvforbigday;
     Button checkwebsite;
     String releaseDate;
+    Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +51,73 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 
+        checkfornotification();
+
+        progressBar = findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+
+        ListView listViewfeed = findViewById(R.id.lv_feed);
+        //db = FirebaseDatabase.getInstance().getReferenceFromUrl("https://intellectualcloud-5fe7b.firebaseio.com/PostDetails");
+        relativeLayout_home = findViewById(R.id.rl_home);
+
+        db = FirebaseDatabase.getInstance().getReferenceFromUrl("https://intellectualcloud-5fe7b.firebaseio.com/");
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                releaseDate = dataSnapshot.child("ReleaseDate").getValue(String.class);
+                /* Toast.makeText(Home.this, "" + releaseDate, Toast.LENGTH_SHORT).show(); */
+                countDownStart(releaseDate);
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        firebaseClient = new FirebaseClient(this, DB_URL, listViewfeed);
+        firebaseClient.refreshdata();
+        //    progressBar.setVisibility(View.GONE);
+
+
+        listViewfeed.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                post post = (post) adapterView.getItemAtPosition(i);
+                Gson gson = new Gson();
+                String objstring = gson.toJson(post);
+                Intent intent = new Intent(Home.this, Detailed.class);
+                intent.putExtra("obj", objstring);
+                //  finish();
+                startActivity(intent);
+
+
+            }
+        });
+
+        initUI();
+        checkwebsite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "http://www.myintellecutalcloud.com";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setVisibility(View.GONE);
+            }
+        }, 2560);
+
+
+    }
+
+    private void checkfornotification() {
         if (getIntent().getExtras() != null) {
             Intent intent = new Intent(this, ShowNotification.class);
 
@@ -74,57 +135,6 @@ public class Home extends AppCompatActivity {
             }
             startActivity(intent);
         }
-
-
-        progressBar = findViewById(R.id.progressbar);
-        progressBar.setVisibility(View.VISIBLE);
-
-        ListView listViewfeed = findViewById(R.id.lv_feed);
-        db = FirebaseDatabase.getInstance().getReferenceFromUrl("https://intellectualcloud-5fe7b.firebaseio.com/PostDetails");
-        relativeLayout_home = findViewById(R.id.rl_home);
-
-        db = FirebaseDatabase.getInstance().getReferenceFromUrl("https://intellectualcloud-5fe7b.firebaseio.com/");
-        db.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                releaseDate = dataSnapshot.child("ReleaseDate").getValue(String.class);
-                /* Toast.makeText(Home.this, "" + releaseDate, Toast.LENGTH_SHORT).show(); */
-                countDownStart(releaseDate);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        firebaseClient = new FirebaseClient(this, DB_URL, listViewfeed);
-        firebaseClient.refreshdata();
-        //    progressBar.setVisibility(View.GONE);
-        listViewfeed.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                post post = (post) adapterView.getItemAtPosition(i);
-                Gson gson = new Gson();
-                String objstring = gson.toJson(post);
-                Intent intent = new Intent(Home.this, Detailed.class);
-                intent.putExtra("obj", objstring);
-                finish();
-                startActivity(intent);
-
-
-            }
-        });
-        initUI();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.GONE);
-            }
-        }, 2560);
-
 
     }
 
@@ -160,6 +170,11 @@ public class Home extends AppCompatActivity {
         CountdownView mCvCountdownViewTest4 = (CountdownView) findViewById(R.id.cv_countdownViewTest4);
         mCvCountdownViewTest4.start(answer);
 
+        if (answer <= 0) {
+            cvforcountdown.setVisibility(View.GONE);
+            cvforbigday.setVisibility(View.VISIBLE);
+
+        }
     }
 
     @Override
@@ -175,13 +190,13 @@ public class Home extends AppCompatActivity {
 
             Intent intent = new Intent(Home.this, About.class);
             startActivity(intent);
-            finish();
+            //  finish();
 
         } else if (id == R.id.privacypolicy) {
 
             Intent intent = new Intent(Home.this, PrivacyPolicy.class);
             startActivity(intent);
-            finish();
+            //  finish();
         } else if (id == R.id.admin) {
 
             final EditText taskEditText = new EditText(this);
@@ -195,7 +210,7 @@ public class Home extends AppCompatActivity {
                             if (taskEditText.getText().toString().equals("9940")) {
 
                                 startActivity(new Intent(Home.this, Admin.class));
-
+                                finish();
                             } else
                                 Toast.makeText(Home.this, "Password Incorrect. Self Destruct in 2 more Attempts.", Toast.LENGTH_LONG).show();
                         }
