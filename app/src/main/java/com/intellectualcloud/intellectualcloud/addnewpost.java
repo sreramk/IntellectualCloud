@@ -124,7 +124,7 @@ public class addnewpost extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
-        startActivity(new Intent(this, Admin.class));
+        startActivity(new Intent(this, Home.class));
     }
 }
 
